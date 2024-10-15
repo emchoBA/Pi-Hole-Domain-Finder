@@ -25,6 +25,8 @@ def get_domains(url):
     for link in links:
         parsed_url = urlparse(link)
         if parsed_url.netloc:
+            if "ad" in parsed_url.netloc:
+                print(parsed_url.netloc + ": Probably is a ad domain!\n")
             domains.add(parsed_url.netloc)
 
     return domains
@@ -39,7 +41,6 @@ def get_ip_addresses(domains):
         except socket.gaierror:
             ip_addresses[domain] = "Unable to resolve"
     return ip_addresses
-
 
 def main():
     url = input("Enter the website URL to analyze: ")
